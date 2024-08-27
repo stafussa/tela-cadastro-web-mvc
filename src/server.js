@@ -31,17 +31,23 @@ enableHotReload(app);
 //rota para pagina inicial
 app.get("/", loginController.exibirPaginaLogin);
 
+
 //rota para pagina de cadastro
 app.get("/criar-conta", cadastroController.exibirPaginaCadastro);
+
 
 //rota para criar novo usuario
 app.post("/criar-conta", cadastroController.adicionarUsuario);
 
+
 //rota para pagina de lista de eventos
 app.get("/eventos", eventoController.exibirPaginaEventos);
 
+
 //rota para pagina de criar evento
 app.get("/criar-evento", eventoController.exibirPaginaCriarEvento);
+
+app.post("/criar-evento", eventoController.criarEvento);
 
 // Inicie o servidor
 const port = 3000;
