@@ -7,7 +7,7 @@ const pool = require('../config/banco-de-dados.js');
 const usuarios = [];
 
 function adicionarUsuario(nome, email, senha) {
-    
+
     // usuarios.push({
     //     id:Date.now(),
     //     nome: nome,
@@ -23,17 +23,26 @@ function adicionarUsuario(nome, email, senha) {
     const senhaCriptografada = md5(senha);
     //adicionar um novo usuário no banco de dados
     pool.query(
-`INSERT INTO usuarios (nome, email, senha, criadoEm) VALUES ('${nome}', '${email}', '${senhaCriptografada}', NOW())`
+        `INSERT INTO usuarios (nome, email, senha, criadoEm) VALUES ('${nome}', '${email}', '${senhaCriptografada}', NOW())`
     ).then(() => {
         console.log('DEU CERTO');
     })
-    .catch((error) => {
-        console.log('ERRO AO INSERIR DADOS', error)
-    })
-        }
+        .catch((error) => {
+            console.log('ERRO AO INSERIR DADOS', error)
+        })
+}
+
+async function buscarUsuarioPorEmail(email) {
+
+    const usuario = await pool.query(`select * from usuarios where email = '${email}'`);
+
+    return usuario[0][0];
+
+}
 
 module.exports = {
-    adicionarUsuario
+    adicionarUsuario,
+    buscarUsuarioPorEmail
 }
 
 

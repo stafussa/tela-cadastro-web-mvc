@@ -32,6 +32,10 @@ enableHotReload(app);
 app.get("/", loginController.exibirPaginaLogin);
 
 
+//rota para autenticar usuario
+app.post("/autenticar", loginController.autenticarUsuario);
+
+
 //rota para pagina de cadastro
 app.get("/criar-conta", cadastroController.exibirPaginaCadastro);
 
